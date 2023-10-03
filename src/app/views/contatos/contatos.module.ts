@@ -5,13 +5,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ContatosService } from './services/contato.service';
 import { ListarContatosComponent } from './listar-contatos/listar-contatos.component';
 import { RouterLink } from '@angular/router';
+import { EditarContatosComponent } from './editar-contatos/editar-contatos.component';
 
 
 
 @NgModule({
   declarations: [
     InserirContatosComponent,
-    ListarContatosComponent
+    ListarContatosComponent,
+    EditarContatosComponent
   ],
   imports: [
     CommonModule,

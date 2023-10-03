@@ -7,7 +7,7 @@ import { FormsContatoViewModel } from "../models/form-contato.view-model";
 @Injectable()
 
 export class ContatosService{
-    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/contatos';
+    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/contatos/';
 
     constructor(private http: HttpClient){
 
@@ -17,10 +17,19 @@ export class ContatosService{
         return this.http.post<any>(this.endpoit, contato,this.obterHeadersAutorizacao())
     }
 
+    public editar(id:string, contato: FormsContatoViewModel): Observable<FormsContatoViewModel>{
+      return this.http.put<any>(this.endpoit + id, contato,this.obterHeadersAutorizacao())
+    }
+
     public selecionarTodos(){
         return this.http.get<any>(this.endpoit, this.obterHeadersAutorizacao())
         .pipe(map((res) => res.dados))
     }
+
+    public selecionarPorId(id: string){
+      return this.http.get<any>(this.endpoit + id, this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados))
+  }
 
     private obterHeadersAutorizacao() {
         const token = environment.apiKey;
