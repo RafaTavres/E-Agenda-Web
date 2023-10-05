@@ -11,8 +11,8 @@ import { ContatosService } from '../services/contato.service';
 })
 export class EditarContatosComponent {
   form!: FormGroup;
-  contatoVM!: FormsContatoViewModel;
   idSelecionado:string | null = null;
+  contatoBuscado:any;
 
   constructor(private route:ActivatedRoute,private formBuilder: FormBuilder,private contatoService: ContatosService,private router:Router) {
    
@@ -20,30 +20,23 @@ export class EditarContatosComponent {
   }
 
    ngOnInit(): void {
-    this.form = this.formBuilder.group({
-     nome: new FormControl(' '),
-     email: new FormControl(' '),
-     telefone: new FormControl(' '),
-     cargo: new FormControl(' '),
-     empresa: new FormControl(' '),
-    });
-
+    
     this.idSelecionado = this.route.snapshot.paramMap.get('id');
 
     if(this.idSelecionado == null)
       return;
 
     this.contatoService.selecionarPorId(this.idSelecionado).subscribe(res => {
-      this.form.patchValue(res);
+      this.contatoBuscado = res;
+      console.log(this.contatoBuscado)
     })
 
 
    }
 
-   gravar(){
-    this.contatoVM = this.form.value;
+   gravar(contatoVM: FormsContatoViewModel){
 
-    this.contatoService.editar(this.idSelecionado! , this.contatoVM).subscribe((res) => {
+    this.contatoService.editar(this.idSelecionado! , contatoVM).subscribe((res) => {
       console.log(res); 
       this.router.navigate(['/contatos/listar'])
     })

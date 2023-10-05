@@ -1,0 +1,42 @@
+<div class="card h-100 border-dark">
+    <div class="card-body d-flex flex-column gap-1">
+      <div class="d-flex flex-column">
+        <h5 class="card-title mb-1 text-primary">
+          {{ compromisso.assunto.slice(0,20)}}..
+        </h5>
+        <span class="card-text">Assunto: {{ compromisso.assunto.slice(0,100)}}</span>
+      </div>
+     
+        <div class="row border border-secondary justify-content-center fw-semibold">
+            Previsto Para
+            <span  class="card-text">Data: {{ compromisso.data }}</span>
+            <span  class="card-text ">Hora de Inicio: {{ compromisso.horaInicio }}</span>
+            <span  class="card-text ">Hora de Termino: {{ compromisso.horaTermino }}</span>
+        </div>
+
+      <span  class="card-text">Contato: {{ compromisso.nomeContato }}</span>
+    </div>
+  
+    <div class="d-flex gap-1 justify-content-end card-footer bg-transparent">
+      <span *ngIf="this.transformarData(compromisso.data) < this.transformarData(dataAtual)" class="card-text fw-semibold text-danger">-Expirado-</span>
+      <span *ngIf="this.transformarData(compromisso.data) == this.transformarData(dataAtual)" class="card-text fw-semibold text-warning">-Evento Hoje-</span>
+      <button
+        class="btn btn-outline-dark rounded-5 py-2"
+        routerLink="/compromissos/editar/{{ compromisso.id }}"
+        aria-label="Editar"
+        ngbTooltip="Editar"
+        placement="bottom"
+      >
+        <i class="bi bi-pen"></i>
+      </button>
+      <button
+        class="btn btn-outline-dark rounded-5 py-2"
+        routerLink="/compromissos/excluir/{{ compromisso.id }}"
+        aria-label="Excluir"
+        ngbTooltip="Excluir"
+        placement="bottom"
+      >
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+  </div>

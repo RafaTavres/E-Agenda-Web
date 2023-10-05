@@ -10,6 +10,8 @@ import { CoreModule } from './core/core.module';
 import { ContatosModule } from './views/contatos/contatos.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CompromissosModule } from './views/compromissos/compromissos.module';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-
 
     ToastrModule.forRoot(
       {
@@ -33,6 +34,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     DashBoardModule,
     ContatosModule,
+    CompromissosModule,
     CoreModule,
   ],
   providers: [],

@@ -1,0 +1,103 @@
+<form [formGroup]="form" (ngSubmit)="gravar()" class="mt-4">
+    <div class="form-group mb-3 position-relative">
+      <label 
+      class="form-label">Nome:</label>
+      <input
+        [ngClass]="campoInvalido ('nome') ? 'is-invalid' : '' "
+        formControlName="nome"
+        class="form-control"
+        type="text"
+        placeholder="Digite o nome do contato"
+      />
+
+      <div class="invalid-tooltip">
+        <span>Nome Precisa ser Preenchido</span>
+      </div>
+
+    </div>
+
+    <div class="form-group mb-3 position-relative">
+      <label class="form-label">Email:</label>
+      <input
+        [ngClass]="campoInvalido ('email') ? 'is-invalid' : '' "
+        
+        formControlName="email"
+        class="form-control"
+        type="text"
+        placeholder="Digite o email do contato"
+      />
+
+      <div class="invalid-tooltip" *ngIf="campoInvalido('email')">
+        <span *ngIf="email?.errors?.['required']"
+          >O email precisa ser preenchido.</span
+        >
+        <span *ngIf="email?.errors?.['email']"
+          >O valor precisa ter um formato de email.</span
+        >
+      </div>
+
+    </div>
+
+    <div class="form-group mb-3 position-relative">
+      <label class="form-label">Telefone:</label>
+      <input
+        [ngClass]="campoInvalido ('telefone') ? 'is-invalid' : '' "
+        formControlName="telefone"
+        class="form-control"
+        type="text"
+        placeholder="Digite o telefone do contato"
+      />
+      <div class="invalid-tooltip" *ngIf="campoInvalido ('email')">
+        <span >Telefone Precisa ser Preenchido</span>
+      </div>
+
+    </div>
+
+    <div class="form-group mb-3 position-relative">
+      <label class="form-label">Cargo:</label>
+      <input
+        [ngClass]="campoInvalido ('cargo') ? 'is-invalid' : '' "
+        formControlName="cargo"
+        class="form-control"
+        type="text"
+        placeholder="Digite o cargo do contato"
+      />
+      <div class="invalid-tooltip" *ngIf="campoInvalido ('email')">
+        <span >Cargo Precisa ser Preenchido</span>
+      </div>
+    </div>
+
+    <div class="form-group mb-3 position-relative">
+      <label class="form-label">Empresa:</label>
+      <input
+        [ngClass]="campoInvalido ('empresa') ? 'is-invalid' : '' "
+        formControlName="empresa"
+        class="form-control"
+        type="text"
+        placeholder="Digite a empresa do contato"
+      />
+      <div class="invalid-tooltip" *ngIf="campoInvalido ('email')">
+        <span >Empresa Precisa ser Preenchido</span>
+      </div>
+
+    </div>
+
+    <div class="card-footer g-grid d-flex gap-1 mt-5">
+      <button
+        type="button submit"
+        class="btn btn-primary px-5"
+      >
+        <i class="bi bi-save me-2"></i>
+        Gravar
+      </button>
+      <button
+        routerLink="/contatos/listar"
+        type="button"
+        class="btn btn-outline-primary px-5"
+      >
+        <i class="pi pi-arrow-left me-2"></i>
+        Voltar
+      </button>
+    </div>
+    
+  </form>

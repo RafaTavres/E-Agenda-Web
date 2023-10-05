@@ -6,6 +6,9 @@ import { ContatosService } from './services/contato.service';
 import { ListarContatosComponent } from './listar-contatos/listar-contatos.component';
 import { RouterLink } from '@angular/router';
 import { EditarContatosComponent } from './editar-contatos/editar-contatos.component';
+import { ExcluirContatosComponent } from './excluir-contatos/excluir-contatos.component';
+import { FormContatosComponent } from './shared/form-contatos/form-contatos.component';
+import { CardContatoComponent } from './card-contato/card-contato.component';
 
 
 
@@ -13,7 +16,10 @@ import { EditarContatosComponent } from './editar-contatos/editar-contatos.compo
   declarations: [
     InserirContatosComponent,
     ListarContatosComponent,
-    EditarContatosComponent
+    EditarContatosComponent,
+    ExcluirContatosComponent,
+    FormContatosComponent,
+    CardContatoComponent
   ],
   imports: [
     CommonModule,
