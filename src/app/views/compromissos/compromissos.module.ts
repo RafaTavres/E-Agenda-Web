@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { NgModule, LOCALE_ID  } from '@angular/core';
+import { CommonModule,registerLocaleData  } from '@angular/common';
 import { InserirCompromissosComponent } from './inserir-compromissos/inserir-compromissos.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -9,8 +9,10 @@ import { ListarCompromissosComponent } from './listar-compromissos/listar-compro
 import { EditarCompromissosComponent } from './editar-compromissos/editar-compromissos.component';
 import { ExcluirCompromissosComponent } from './excluir-compromissos/excluir-compromissos.component';
 import { CardCompromissoComponent } from './card-compromisso/card-compromisso.component';
+import localePt from '@angular/common/locales/pt';
+import 'src/app/extensions/form-group.extension'
 
-
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { CardCompromissoComponent } from './card-compromisso/card-compromisso.co
     RouterLink
   ],
   providers:[
-    CompromissoService
+    CompromissoService,
+    {provide: LOCALE_ID,useValue: 'pt-BR'},
   ]
 })
 export class CompromissosModule { }

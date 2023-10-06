@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FormsContatoViewModel } from '../models/form-contato.view-model';
 import { ContatosService } from '../services/contato.service';
 
@@ -14,7 +15,7 @@ export class EditarContatosComponent {
   idSelecionado:string | null = null;
   contatoBuscado:any;
 
-  constructor(private route:ActivatedRoute,private formBuilder: FormBuilder,private contatoService: ContatosService,private router:Router) {
+  constructor(private toastrService:ToastrService,private route:ActivatedRoute,private formBuilder: FormBuilder,private contatoService: ContatosService,private router:Router) {
    
    
   }
@@ -26,19 +27,35 @@ export class EditarContatosComponent {
     if(this.idSelecionado == null)
       return;
 
-    this.contatoService.selecionarPorId(this.idSelecionado).subscribe(res => {
-      this.contatoBuscado = res;
-      console.log(this.contatoBuscado)
-    })
-
-
+    this.contatoBuscado = this.route.snapshot.data['contato']
+    console.log(this.contatoBuscado)
+    
    }
 
    gravar(contatoVM: FormsContatoViewModel){
 
-    this.contatoService.editar(this.idSelecionado! , contatoVM).subscribe((res) => {
-      console.log(res); 
-      this.router.navigate(['/contatos/listar'])
-    })
+    this.contatoService.editar(this.idSelecionado! , contatoVM).subscribe({
+      next:(res: FormsContatoViewModel) => this.processarSucesso(res),
+      error: (error: Error) => this.processarErro(error)
+    }
+    )
    }
+
+   
+   processarErro(error: Error): void {
+    this.toastrService.error(
+     `Falha ao editar contato: ${error.message}`,
+     'Erro'
+   ); 
+
+ }
+
+ processarSucesso(res: FormsContatoViewModel){
+   this.toastrService.success(
+     `Contato ${res.nome} editado com sucesso`,
+     'Sucesso'
+   ); 
+
+   this.router.navigate(['/contatos/listar'])
+ }
 }

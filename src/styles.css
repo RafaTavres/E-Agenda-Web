@@ -1,2 +1,6 @@
 
  @import url("bootstrap-icons/font/bootstrap-icons.min.css"); 
+.ngx-toastr{
+    margin-right: 5px 0 !important;
+    margin: 5px 0 !important;
+}

@@ -9,7 +9,7 @@
      
         <div class="row border border-secondary justify-content-center fw-semibold">
             Previsto Para
-            <span  class="card-text">Data: {{ compromisso.data }}</span>
+            <span  class="card-text">Data: {{ compromisso.data | date:'dd/MM/yyyy' }} ({{ compromisso.data | date:'dd MMM YY' }})</span>
             <span  class="card-text ">Hora de Inicio: {{ compromisso.horaInicio }}</span>
             <span  class="card-text ">Hora de Termino: {{ compromisso.horaTermino }}</span>
         </div>
@@ -18,9 +18,9 @@
     </div>
   
     <div class="d-flex gap-1 justify-content-end card-footer bg-transparent">
-      <span *ngIf="this.transformarData(compromisso.data) < this.transformarData(dataAtual)" class="card-text fw-semibold text-danger">-Expirado-</span>
-      <span *ngIf="this.transformarData(compromisso.data) == this.transformarData(dataAtual)" class="card-text fw-semibold text-warning">-Evento Hoje-</span>
-      <button
+      <span *ngIf="transformarData(compromisso.data) < transformarData(dataAtual)" class="card-text fw-semibold text-danger">-Expirado-</span>
+      <span *ngIf="transformarData(compromisso.data) == transformarData(dataAtual)" class="card-text fw-semibold text-warning">-Evento Hoje-</span>
+      <button 
         class="btn btn-outline-dark rounded-5 py-2"
         routerLink="/compromissos/editar/{{ compromisso.id }}"
         aria-label="Editar"

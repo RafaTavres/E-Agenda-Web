@@ -18,17 +18,12 @@ export class ExcluirContatosComponent implements OnInit {
     }
 
     ngOnInit(): void {
-  
-  
-     
+    
     this.idSelecionado = this.route.snapshot.paramMap.get('id');
 
-    if(this.idSelecionado == null)
-      return;
-      this.contatoService.selecionarCompletoPorId(this.idSelecionado).subscribe(res => {
-        this.contatoVM = res
-      })
-     }
+    this.contatoVM = this.route.snapshot.data['contato']; 
+  
+    }
 
      excluir(){
       this.contatoService.excluir(this.idSelecionado!).subscribe(res => {

@@ -12,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CompromissosModule } from './views/compromissos/compromissos.module';
 import { DatePipe } from '@angular/common';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+    
 @NgModule({
   declarations: [
     AppComponent
@@ -21,6 +22,7 @@ import { DatePipe } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    BrowserAnimationsModule,
 
     ToastrModule.forRoot(
       {

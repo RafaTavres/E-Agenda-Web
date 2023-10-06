@@ -32,7 +32,7 @@ export class FormContatosComponent implements OnInit {
     });
     
     
-    setTimeout(() => {this.form.patchValue(this.contatoBuscado)},2000)
+    this.form.patchValue(this.contatoBuscado)
   
   }
 
@@ -46,12 +46,14 @@ export class FormContatosComponent implements OnInit {
 
   gravar(){
     if(this.form.invalid){
-      this.toastrService.warning(
-        'Verifique o Preenchimento do Formulario',
-        'Aviso'
-      );
 
-      this.form.markAllAsTouched();
+      const erros = this.form.validate();
+
+      for(let erro of erros){
+       this.toastrService.warning(
+         erro
+       );
+      }
 
       return;
      }

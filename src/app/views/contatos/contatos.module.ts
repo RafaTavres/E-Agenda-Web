@@ -9,7 +9,7 @@ import { EditarContatosComponent } from './editar-contatos/editar-contatos.compo
 import { ExcluirContatosComponent } from './excluir-contatos/excluir-contatos.component';
 import { FormContatosComponent } from './shared/form-contatos/form-contatos.component';
 import { CardContatoComponent } from './card-contato/card-contato.component';
-
+import 'src/app/extensions/form-group.extension'
 
 
 @NgModule({

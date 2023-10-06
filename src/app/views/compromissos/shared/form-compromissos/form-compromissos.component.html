@@ -3,6 +3,7 @@
     <div class="form-group mb-3 position-relative">
       <label class="form-label">Assunto:</label>
       <input
+        [ngClass]="campoInvalido ('assunto') ? 'is-invalid' : '' "
         formControlName="assunto"
         class="form-control"
         type="text"
@@ -51,6 +52,7 @@
       <div class="col-6">
         <label class="form-label">Hora de Início:</label>
         <input
+          [ngClass]="campoInvalido ('horaInicio') ? 'is-invalid' : '' "
           formControlName="horaInicio"
           class="form-control"
           type="time"
@@ -61,6 +63,7 @@
       <div class="col-6">
         <label class="form-label">Hora de Término:</label>
         <input
+          [ngClass]="campoInvalido ('horaTermino') ? 'is-invalid' : '' "
           formControlName="horaTermino"
           class="form-control"
           type="time"
@@ -71,8 +74,8 @@
 
     <div class="form-group mb-3 position-relative">
       <label class="form-label">Contato:</label>
-      <select (change)="o()" formControlName="contatoId" class="form-select w-50" name="categoriaId" id="">
-        <option  *ngFor="let contato of contatos" [ngValue]="contato.id">
+      <select [ngClass]="campoInvalido ('contatoId') ? 'is-invalid' : '' "  formControlName="contatoId" class="form-select w-50" name="categoriaId" id="">
+        <option *ngFor="let contato of contatos" [ngValue]="contato.id">
             {{contato.nome}}
         </option>
       </select>

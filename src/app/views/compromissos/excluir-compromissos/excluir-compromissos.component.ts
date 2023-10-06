@@ -21,23 +21,18 @@ export class ExcluirCompromissosComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-   
   this.idSelecionado = this.route.snapshot.paramMap.get('id');
 
-  if(this.idSelecionado == null)
-    return;
-    this.compromissoService.selecionarCompletoPorId(this.idSelecionado).subscribe(res => {
-      this.compromissoVM = res
-      console.log(this.compromissoVM)
-    })
-   }
+  this.compromissoVM = this.route.snapshot.data['compromisso']; 
+
+  }
 
    excluir(){
     this.compromissoService.excluir(this.idSelecionado!).subscribe(res => {
       this.router.navigate(['/compromissos/listar'])
     })
-   }
+    
+  }
 
 }
 
