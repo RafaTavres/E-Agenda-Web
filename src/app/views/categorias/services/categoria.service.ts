@@ -1,39 +1,35 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from "rxjs";
+import { Observable, map, catchError, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
-import { FormsContatoViewModel } from "../models/form-contato.view-model";
+import { FormsCompromissoViewModel } from "../../compromissos/models/form-compromisso.view-model";
+import { FormsCategoriaViewModel } from "../models/form-categoria.view-model";
 
 @Injectable()
 
-export class ContatosService{
-    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/contatos/';
+export class CategoriaService{
+    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/categorias/';
 
     constructor(private http: HttpClient){
 
     }
 
-    public inserir(contato: FormsContatoViewModel): Observable<FormsContatoViewModel>{
-        return this.http.post<any>(this.endpoit, contato,this.obterHeadersAutorizacao())
-        .pipe(
-          map(res => res.dados),
-          catchError((err: HttpErrorResponse) =>this.processarHttpErros(err))
-          )
+    public inserir(categoria: FormsCategoriaViewModel): Observable<FormsCategoriaViewModel>{
+        return this.http.post<any>(this.endpoit, categoria,this.obterHeadersAutorizacao())
+        .pipe(map((res) => res.dados),
+        catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
-  
-
-    public editar(id:string, contato: FormsContatoViewModel): Observable<FormsContatoViewModel>{
-      return this.http.put<any>(this.endpoit + id, contato,this.obterHeadersAutorizacao())
-      .pipe(map(res => res.dados),
+    public editar(id:string, categoria: FormsCategoriaViewModel): Observable<FormsCategoriaViewModel>{
+      return this.http.put<any>(this.endpoit + id, categoria,this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public excluir(id:string){
       return this.http.delete<any>(this.endpoit + id,this.obterHeadersAutorizacao())
-      .pipe(map(res => res),
-       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
-     
+      .pipe(map((res) => res),
+      catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodos(){
@@ -71,6 +67,7 @@ export class ContatosService{
       return throwError(() => new Error(mensagemErro));
     }
 
+    
     private obterHeadersAutorizacao() {
         const token = environment.apiKey;
     

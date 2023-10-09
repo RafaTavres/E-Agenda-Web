@@ -7,11 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule } from 'ngx-toastr';
 import { DashBoardModule } from './views/dash-board/dash-board.module';
 import { CoreModule } from './core/core.module';
-import { ContatosModule } from './views/contatos/contatos.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CompromissosModule } from './views/compromissos/compromissos.module';
-import { DatePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     
 @NgModule({
@@ -35,8 +32,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     
     HttpClientModule,
     DashBoardModule,
-    ContatosModule,
-    CompromissosModule,
     CoreModule,
   ],
   providers: [],

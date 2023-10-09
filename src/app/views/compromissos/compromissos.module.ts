@@ -11,6 +11,8 @@ import { ExcluirCompromissosComponent } from './excluir-compromissos/excluir-com
 import { CardCompromissoComponent } from './card-compromisso/card-compromisso.component';
 import localePt from '@angular/common/locales/pt';
 import 'src/app/extensions/form-group.extension'
+import { CompromissosRoutingModule } from './compromissos-routing.module';
+import { ContatosModule } from '../contatos/contatos.module';
 
 registerLocaleData(localePt);
 
@@ -26,7 +28,9 @@ registerLocaleData(localePt);
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    CompromissosRoutingModule,
+    ContatosModule
   ],
   providers:[
     CompromissoService,

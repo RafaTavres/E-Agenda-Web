@@ -10,6 +10,7 @@ import { ExcluirContatosComponent } from './excluir-contatos/excluir-contatos.co
 import { FormContatosComponent } from './shared/form-contatos/form-contatos.component';
 import { CardContatoComponent } from './card-contato/card-contato.component';
 import 'src/app/extensions/form-group.extension'
+import { ContatoRoutingModule } from './contatos-routing.module';
 
 
 @NgModule({
@@ -24,7 +25,9 @@ import 'src/app/extensions/form-group.extension'
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    ContatoRoutingModule,
+    
   ],
   providers:[
     ContatosService

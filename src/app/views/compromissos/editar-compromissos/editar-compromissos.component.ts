@@ -15,9 +15,9 @@ export class EditarCompromissosComponent {
 
   form!: FormGroup;
   idSelecionado:string | null = null;
-  compromissoBuscado:any;
+  compromissoBuscado!:FormsCompromissoViewModel;
 
-  constructor(private toastrService:ToastrService,private route:ActivatedRoute,private formBuilder: FormBuilder,private contatoService: ContatosService,private router:Router,private compromissoService:CompromissoService) {
+  constructor(private toastrService:ToastrService,private route:ActivatedRoute,private router:Router,private compromissoService:CompromissoService) {
    
    
   }
@@ -29,9 +29,8 @@ export class EditarCompromissosComponent {
     if(this.idSelecionado == null)
       return;
 
-    this.compromissoBuscado = this.route.snapshot.data['compromisso']
-    
-   }
+    this.compromissoBuscado = this.route.snapshot.data['compromisso']; 
+  }
 
    gravar(compromissoVM: FormsCompromissoViewModel){
 

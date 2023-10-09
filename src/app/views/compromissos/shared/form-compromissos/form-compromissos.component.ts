@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, FormControl, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
-import { DateValidator } from "src/app/Validators/date-validator";
+import { DateValidator } from "src/app/validators/date-validator";
 import { ListarContatoViewModel } from "src/app/views/contatos/models/listar-contato.view-model";
 import { ContatosService } from "src/app/views/contatos/services/contato.service";
 import { FormsCompromissoViewModel } from "../../models/form-compromisso.view-model";
@@ -31,8 +31,8 @@ export class FormCompromissosComponent  implements OnInit {
      tipoLocal: new FormControl(1,[Validators.required]),
      link: new FormControl(''),
      local: new FormControl(''),
-     data: new FormControl(new Date(''),[Validators.required,Validators.nullValidator]),
-     horaInicio: new FormControl('08:00',[Validators.required,DateValidator.ptDate]),
+     data: new FormControl(new Date(''),[Validators.required]),
+     horaInicio: new FormControl('08:00',[Validators.required]),
      horaTermino: new FormControl('09:00',[Validators.required]),
      contatoId: new FormControl(''),
     });
@@ -50,7 +50,7 @@ export class FormCompromissosComponent  implements OnInit {
         data: this.compromissoBuscado.data.slice(0,10),
         horaInicio: this.compromissoBuscado.horaInicio,
         horaTermino:this.compromissoBuscado.horaTermino,
-        contatoId: this.compromissoBuscado.contato.id,
+        contatoId: this.compromissoBuscado.contatoId,
         }
       );
   

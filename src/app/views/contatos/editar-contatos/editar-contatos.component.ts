@@ -28,6 +28,7 @@ export class EditarContatosComponent {
       return;
 
     this.contatoBuscado = this.route.snapshot.data['contato']
+    console.clear();
     console.log(this.contatoBuscado)
     
    }
