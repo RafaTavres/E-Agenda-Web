@@ -24,7 +24,7 @@ export class InserirCompromissosComponent {
 
   processarErro(error: Error): void {
     this.toastrService.error(
-     `Falha ao adicionar contato: ${error.message}`,
+     `Falha ao adicionar compromisso: ${error.message}`,
      'Erro'
    ); 
   }

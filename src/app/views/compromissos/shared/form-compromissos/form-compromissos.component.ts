@@ -11,7 +11,7 @@ import { FormsCompromissoViewModel } from "../../models/form-compromisso.view-mo
   templateUrl: './form-compromissos.component.html',
   styleUrls: ['./form-compromissos.component.css']
 })
-export class FormCompromissosComponent  implements OnInit {
+export class FormCompromissosComponent implements OnInit {
 
   form!: FormGroup;
   compromissoVM!: FormsCompromissoViewModel;

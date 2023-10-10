@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
 import { ContatosService } from '../../contatos/services/contato.service';
 import { ListarCompromissoViewModel } from '../models/listar-compromissos.view-model';
 import { CompromissoService } from '../services/compromissos.service';
@@ -12,14 +14,16 @@ import { CompromissoService } from '../services/compromissos.service';
 export class ListarCompromissosComponent  implements OnInit{
   compromissos:ListarCompromissoViewModel[] = [];
 
-  constructor(private compromissoService: CompromissoService,private toastrService:ToastrService){
+  constructor(private route:ActivatedRoute,private toastrService:ToastrService){
   }
 
   ngOnInit(): void {
-   this.compromissoService.selecionarTodos().subscribe({
+ 
+    this.route.data.pipe(map((dados) => dados['compromissos'])).subscribe({
       next:(res: ListarCompromissoViewModel[]) => this.processarSucesso(res),
       error: (error: Error) => this.processarErro(error)
     })
+    
   }
 
   processarErro(error: Error): void {

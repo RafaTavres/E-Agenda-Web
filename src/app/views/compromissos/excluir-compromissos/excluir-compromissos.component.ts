@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListarCompromissosComponent } from '../listar-compromissos/listar-compromissos.component';
-import { ListarCompromissoViewModel } from '../models/listar-compromissos.view-model';
+import { ToastrService } from 'ngx-toastr';
+import { FormsCompromissoViewModel } from '../models/form-compromisso.view-model';
 import { VisualizacaoCompromissoViewModel } from '../models/visualizacao-compromisso.view-model';
 import { CompromissoService } from '../services/compromissos.service';
 
@@ -15,7 +15,7 @@ export class ExcluirCompromissosComponent implements OnInit {
   idSelecionado:string | null = null;
 
 
-  constructor(private route:ActivatedRoute,private compromissoService: CompromissoService,private router:Router){
+  constructor(private toastrService:ToastrService,private route:ActivatedRoute,private compromissoService: CompromissoService,private router:Router){
 
   }
 
@@ -28,11 +28,30 @@ export class ExcluirCompromissosComponent implements OnInit {
   }
 
    excluir(){
-    this.compromissoService.excluir(this.idSelecionado!).subscribe(res => {
-      this.router.navigate(['/compromissos/listar'])
+    this.compromissoService.excluir(this.idSelecionado!).subscribe( 
+    {
+      next:(res: FormsCompromissoViewModel) => this.processarSucesso(),
+      error: (error: Error) => this.processarErro(error)
     })
     
   }
 
+  processarErro(error: Error): void {
+    this.toastrService.error(
+    `Falha ao excluir compromisso: ${error.message}`,
+    'Erro'
+      ); 
+
+  }
+
+  processarSucesso(){
+      this.toastrService.success(
+        `Compromisso excluido com sucesso`,
+        'Sucesso'
+      ); 
+
+      this.router.navigate(['/compromissos/listar'])
+  
+  }
 }
 

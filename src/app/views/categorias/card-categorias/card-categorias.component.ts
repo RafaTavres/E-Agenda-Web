@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { listarCategoriaViewModel } from '../models/listar-categorias.view-model';
+import { listarCategoriaViewModel as ListarCategoriaViewModel } from '../models/listar-categorias.view-model';
 
 @Component({
   selector: 'app-card-categorias',
@@ -9,7 +9,7 @@ import { listarCategoriaViewModel } from '../models/listar-categorias.view-model
 export class CardCategoriasComponent {
 
   dataAtual:Date = new Date();
-  @Input() categoria!: listarCategoriaViewModel;
+  @Input() categoria!: ListarCategoriaViewModel;
 
 
 }

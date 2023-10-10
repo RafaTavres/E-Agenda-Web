@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
 import { ListarCompromissoViewModel } from '../../compromissos/models/listar-compromissos.view-model';
 import { CompromissoService } from '../../compromissos/services/compromissos.service';
 import { listarCategoriaViewModel as ListarCategoriaViewModel } from '../models/listar-categorias.view-model';
@@ -13,11 +15,12 @@ import { CategoriaService } from '../services/categoria.service';
 export class ListarCategoriasComponent  implements OnInit{
   categorias: ListarCategoriaViewModel[] = [];
 
-  constructor(private categoriasService: CategoriaService,private toastrService:ToastrService){
+  constructor(private route:ActivatedRoute,private categoriasService: CategoriaService,private toastrService:ToastrService){
   }
 
   ngOnInit(): void {
-   this.categoriasService.selecionarTodos().subscribe({
+   
+    this.route.data.pipe(map((dados) => dados['categorias'])).subscribe({
       next:(res: ListarCategoriaViewModel[]) => this.processarSucesso(res),
       error: (error: Error) => this.processarErro(error)
     })

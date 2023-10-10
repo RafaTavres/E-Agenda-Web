@@ -2,32 +2,32 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http
 import { Injectable } from "@angular/core";
 import { Observable, map, catchError, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
-import { FormsCompromissoViewModel } from "../../compromissos/models/form-compromisso.view-model";
+import { FormsDespesasViewModel } from "../models/form-despesas.view-model";
 
 @Injectable()
 
-export class CompromissoService{
-    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/compromissos/';
+export class DespesasService{
+    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/despesas/';
 
     constructor(private http: HttpClient){
 
     }
 
-    public inserir(compromisso: FormsCompromissoViewModel): Observable<FormsCompromissoViewModel>{
-        return this.http.post<any>(this.endpoit, compromisso,this.obterHeadersAutorizacao())
+    public inserir(despesa: FormsDespesasViewModel): Observable<FormsDespesasViewModel>{
+        return this.http.post<any>(this.endpoit, despesa,this.obterHeadersAutorizacao())
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
-    public editar(id:string, compromisso: FormsCompromissoViewModel): Observable<FormsCompromissoViewModel>{
-      return this.http.put<any>(this.endpoit + id, compromisso,this.obterHeadersAutorizacao())
+    public editar(id:string, despesa: FormsDespesasViewModel): Observable<FormsDespesasViewModel>{
+      return this.http.put<any>(this.endpoit + id, despesa,this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public excluir(id:string){
       return this.http.delete<any>(this.endpoit + id,this.obterHeadersAutorizacao())
-      .pipe(map(res => res),
+      .pipe(map((res) => res),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 

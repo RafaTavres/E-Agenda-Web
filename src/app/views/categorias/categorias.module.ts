@@ -10,6 +10,7 @@ import { CategoriaService } from './services/categoria.service';
 import { ListarCategoriasComponent } from './listar-categorias/listar-categorias.component';
 import { CardCategoriasComponent } from './card-categorias/card-categorias.component';
 import { ExcluirCategoriasComponent } from './excluir-categorias/excluir-categorias.component';
+import { EditarCategoriasComponent } from './editar-categorias/editar-categorias.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ExcluirCategoriasComponent } from './excluir-categorias/excluir-categor
     FormCategoriasComponent,
     ListarCategoriasComponent,
     CardCategoriasComponent,
-    ExcluirCategoriasComponent
+    ExcluirCategoriasComponent,
+    EditarCategoriasComponent
   ],
   imports: [
     CommonModule,

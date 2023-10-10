@@ -43,20 +43,20 @@ export class EditarContatosComponent {
    }
 
    
-   processarErro(error: Error): void {
-    this.toastrService.error(
-     `Falha ao editar contato: ${error.message}`,
-     'Erro'
-   ); 
+    processarErro(error: Error): void {
+        this.toastrService.error(
+        `Falha ao editar contato: ${error.message}`,
+        'Erro'
+      ); 
 
- }
+    }
 
- processarSucesso(res: FormsContatoViewModel){
-   this.toastrService.success(
-     `Contato ${res.nome} editado com sucesso`,
-     'Sucesso'
-   ); 
+    processarSucesso(res: FormsContatoViewModel){
+      this.toastrService.success(
+        `Contato ${res.nome} editado com sucesso`,
+        'Sucesso'
+      ); 
 
-   this.router.navigate(['/contatos/listar'])
- }
+      this.router.navigate(['/contatos/listar'])
+    }
 }
