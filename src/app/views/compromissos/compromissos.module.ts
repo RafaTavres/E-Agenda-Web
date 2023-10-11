@@ -13,6 +13,7 @@ import localePt from '@angular/common/locales/pt';
 import 'src/app/extensions/form-group.extension'
 import { CompromissosRoutingModule } from './compromissos-routing.module';
 import { ContatosModule } from '../contatos/contatos.module';
+import { VisualizarCompromissosComponent } from './visualizar-compromissos/visualizar-compromissos.component';
 
 registerLocaleData(localePt);
 
@@ -23,7 +24,8 @@ registerLocaleData(localePt);
     ListarCompromissosComponent,
     EditarCompromissosComponent,
     ExcluirCompromissosComponent,
-    CardCompromissoComponent
+    CardCompromissoComponent,
+    VisualizarCompromissosComponent
   ],
   imports: [
     CommonModule,

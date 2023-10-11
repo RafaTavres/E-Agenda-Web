@@ -8,6 +8,7 @@ import { FormsCompromissoViewModel } from "./models/form-compromisso.view-model"
 import { ListarCompromissoViewModel } from "./models/listar-compromissos.view-model";
 import { VisualizacaoCompromissoViewModel } from "./models/visualizacao-compromisso.view-model";
 import { CompromissoService } from "./services/compromissos.service";
+import { VisualizarCompromissosComponent } from "./visualizar-compromissos/visualizar-compromissos.component";
 
 const formsCompromissoResolver: ResolveFn<FormsCompromissoViewModel> =  
   (route: ActivatedRouteSnapshot) => 
@@ -50,6 +51,12 @@ const routes: Routes = [
       {
         path:'excluir/:id',
         component:ExcluirCompromissosComponent,
+        resolve:{ compromisso: visualizaCompromissoResolver},
+      }
+      ,
+      {
+        path:'visualizar/:id',
+        component:VisualizarCompromissosComponent,
         resolve:{ compromisso: visualizaCompromissoResolver},
       }
       ,

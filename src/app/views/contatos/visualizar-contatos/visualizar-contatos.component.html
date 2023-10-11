@@ -56,7 +56,9 @@
             <label class="control-label">Compromissos:</label>
           </dt>
           <div *ngIf="contatoVM.compromissos.length != 0" class="border border-dark rounded-2">
-            <dd *ngFor="let compromisso of contatoVM.compromissos" class="col-md-8 fw-bold" >Assunto: {{compromisso.assunto}} , dia  {{compromisso.data | date: 'dd/MM/yyyy'}} , ás {{compromisso.horaInicio}} </dd>
+            <hr/>
+                <dd *ngFor="let compromisso of contatoVM.compromissos" class="col-md-8 fw-bold" >Assunto: {{compromisso.assunto}} , dia  {{compromisso.data | date: 'dd/MM/yyyy'}} , ás {{compromisso.horaInicio}} <hr/> </dd>
+            <hr/>
           </div>
 
         </dl>

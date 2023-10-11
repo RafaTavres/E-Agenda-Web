@@ -25,26 +25,7 @@ export class VisualizarContatosComponent  implements OnInit {
   this.idSelecionado = this.route.snapshot.paramMap.get('id');
 
   this.contatoVM = this.route.snapshot.data['contato']; 
-  console.clear()
-  console.log(this.contatoVM)
   }
 
-
-  processarErro(error: Error): void {
-    this.toastrService.error(
-    `Falha ao excluir contato: ${error.message}`,
-    'Erro'
-      ); 
-
-  }
-
-  processarSucesso(){
-      this.toastrService.success(
-        `Contato excluido com sucesso`,
-        'Sucesso'
-      ); 
-
-      this.router.navigate(['/contatos/listar'])
-  }
     
 }
