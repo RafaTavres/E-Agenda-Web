@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { listarCategoriaViewModel as ListarCategoriaViewModel } from '../models/listar-categorias.view-model';
+import { listarCategoriaViewModel as ListarCategoriaViewModel } from '../../models/listar-categorias.view-model';
 
 @Component({
   selector: 'app-card-categorias',

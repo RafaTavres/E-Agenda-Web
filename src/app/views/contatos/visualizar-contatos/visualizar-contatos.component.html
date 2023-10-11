@@ -1,0 +1,79 @@
+
+<div class="container">
+    <div class="row">
+      <!-- Conteúdo principal -->
+      <div class="col-12 col-md-10 col-lg-9 mx-auto my-5">
+        <!-- Titulo -->
+        <div class="text-md-start">
+          <div class="text-md-start">
+            <h1 class="fw-bold text-primary">Visualizando Contato  <i class="bi bi-phone-fill"></i></h1>
+            <hr />
+          </div>
+  
+          <h2 class="fs-5">
+           Contato: {{contatoVM.nome}}
+          </h2>
+        </div>
+  
+        <dl class="form-group mt-4 row">
+          <dt class="col-md-4">
+            <label class="control-label">Nome: </label>
+          </dt>
+          <dd class="col-md-8">
+            {{contatoVM.nome}}
+          </dd>
+  
+          <dt class="col-md-4">
+            <label class="control-label">Email:</label>
+          </dt>
+          <dd class="col-md-8">
+            {{contatoVM.email}}
+          </dd>
+  
+          <dt class="col-md-4">
+            <label class="control-label">Telefone:</label>
+          </dt>
+          <dd class="col-md-8">
+            {{contatoVM.telefone}}
+          </dd>
+  
+          <dt class="col-md-4">
+            <label class="control-label">Cargo:</label>
+          </dt>
+          <dd class="col-md-8">
+            {{contatoVM.cargo}}
+          </dd>
+  
+          <dt class="col-md-4">
+            <label class="control-label">Empresa:</label>
+          </dt>
+          <dd class="col-md-8">
+            {{contatoVM.empresa}}
+          </dd>
+
+
+          <dt class="col-md-4">
+            <label class="control-label">Compromissos:</label>
+          </dt>
+          <div *ngIf="contatoVM.compromissos.length != 0" class="border border-dark rounded-2">
+            <dd *ngFor="let compromisso of contatoVM.compromissos" class="col-md-8 fw-bold" >Assunto: {{compromisso.assunto}} , dia  {{compromisso.data | date: 'dd/MM/yyyy'}} , ás {{compromisso.horaInicio}} </dd>
+          </div>
+
+        </dl>
+  
+        <div class="card-footer g-grid d-flex gap-1 mt-5">
+         
+          <button
+            routerLink="/contatos/listar"
+            type="button"
+            class="btn btn-outline-primary px-5"
+          >
+            <i class="bi bi-arrow-return-left me-2"></i>
+            Voltar
+          </button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  

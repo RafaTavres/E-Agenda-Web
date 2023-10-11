@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, LOCALE_ID, OnInit } from '@angular/core';
-import { ListarCompromissoViewModel } from '../models/listar-compromissos.view-model';
+import { ListarCompromissoViewModel } from '../../models/listar-compromissos.view-model';
 
 @Component({
   selector: 'app-card-compromisso',

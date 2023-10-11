@@ -1,5 +1,5 @@
 <div class="card h-100 border-dark">
-    <div class="card-body d-flex flex-column gap-1">
+    <div  routerLink="/contatos/visualizar/{{ contato.id }}" class="card-body d-flex flex-column gap-1">
       <div class="d-flex flex-column">
         <h5 class="card-title mb-1 text-primary">
           {{ contato.nome }}
@@ -12,7 +12,18 @@
   
     <div class="d-flex gap-1 justify-content-end card-footer bg-transparent">
       <button
-        class="btn btn-outline-dark rounded-5 py-2"
+      
+        class="btn btn-outline-danger rounded-5 py-2"
+         (click)="favoritarClick()"
+        aria-label="Favoritar"
+        ngbTooltip="Favoritar"
+        placement="bottom"
+      > 
+        <i  [ngClass]="contato.favorito ? 'bi-heart-fill' : 'bi-heart'"
+             class="bi "></i>
+      </button>
+      <button
+        class="btn btn-outline-primary rounded-5 py-2"
         routerLink="/contatos/editar/{{ contato.id }}"
         aria-label="Editar"
         ngbTooltip="Editar"

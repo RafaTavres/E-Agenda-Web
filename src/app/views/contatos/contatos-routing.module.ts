@@ -8,6 +8,7 @@ import { FormsContatoViewModel } from "./models/form-contato.view-model";
 import { ListarContatoViewModel } from "./models/listar-contato.view-model";
 import { VisualizarContatoViewModel } from "./models/visualizar-contato.view-model";
 import { ContatosService } from "./services/contato.service";
+import { VisualizarContatosComponent } from "./visualizar-contatos/visualizar-contatos.component";
 
 const formsContatoResolver: ResolveFn<FormsContatoViewModel> =  
   (route: ActivatedRouteSnapshot) => 
@@ -21,11 +22,13 @@ const visualizarContatoResolver: ResolveFn<VisualizarContatoViewModel> =
     return inject(ContatosService).selecionarCompletoPorId(route.paramMap.get('id')!)
   }
 
-  const listarContatosResolver: ResolveFn<ListarContatoViewModel> =  
+const listarContatosResolver: ResolveFn<ListarContatoViewModel> =  
   () => 
   {
     return inject(ContatosService).selecionarTodos()
   }
+
+
 
 const routes: Routes = [
  //contatos
@@ -48,6 +51,12 @@ const routes: Routes = [
   {
     path:'excluir/:id',
     component:ExcluirContatosComponent,
+    resolve:{ contato: visualizarContatoResolver},
+  }
+  ,
+  {
+    path:'visualizar/:id',
+    component:VisualizarContatosComponent,
     resolve:{ contato: visualizarContatoResolver},
   }
   ,

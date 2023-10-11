@@ -38,6 +38,8 @@ export class InserirContatosComponent{
     }
 
     processarSucesso(res: FormsContatoViewModel){
+      console.clear()
+      console.log(res);
       this.toastrService.success(
         `Contato ${res.nome} adicionado com sucesso`,
         'Sucesso'

@@ -7,7 +7,7 @@ import { FormsContatoViewModel } from "../models/form-contato.view-model";
 @Injectable()
 
 export class ContatosService{
-    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/contatos/';
+    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/contatos';
 
     constructor(private http: HttpClient){
 
@@ -24,13 +24,19 @@ export class ContatosService{
   
 
     public editar(id:string, contato: FormsContatoViewModel): Observable<FormsContatoViewModel>{
-      return this.http.put<any>(this.endpoit + id, contato,this.obterHeadersAutorizacao())
+      return this.http.put<any>(this.endpoit + '/'+ id, contato,this.obterHeadersAutorizacao())
       .pipe(map(res => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
+    public favoritar(id:string): Observable<FormsContatoViewModel>{
+      return this.http.put<any>(this.endpoit + '/favoritos/'+ id,{},this.obterHeadersAutorizacao())
+      .pipe(map(res => res),
+      catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
+    }
+
     public excluir(id:string){
-      return this.http.delete<any>(this.endpoit + id,this.obterHeadersAutorizacao())
+      return this.http.delete<any>(this.endpoit + '/'+id,this.obterHeadersAutorizacao())
       .pipe(map(res => res),
        catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
      
@@ -42,14 +48,26 @@ export class ContatosService{
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
+    public selecionarTodosFavoritos(){
+      return this.http.get<any>(this.endpoit +'?statusFavorito=1', this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
+      catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
+    }
+
+    public selecionarTodosNaoFavoritos(){
+      return this.http.get<any>(this.endpoit +'?statusFavorito=2', this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
+      catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
+    }
+
     public selecionarPorId(id: string){
-      return this.http.get<any>(this.endpoit + id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + '/'+ id, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarCompletoPorId(id: string){
-      return this.http.get<any>(this.endpoit +'visualizacao-completa/' + id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit +'/visualizacao-completa/' + id, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }

@@ -8,7 +8,7 @@ import { CompromissoService } from './services/compromissos.service';
 import { ListarCompromissosComponent } from './listar-compromissos/listar-compromissos.component';
 import { EditarCompromissosComponent } from './editar-compromissos/editar-compromissos.component';
 import { ExcluirCompromissosComponent } from './excluir-compromissos/excluir-compromissos.component';
-import { CardCompromissoComponent } from './card-compromisso/card-compromisso.component';
+import { CardCompromissoComponent } from './shared/card-compromisso/card-compromisso.component';
 import localePt from '@angular/common/locales/pt';
 import 'src/app/extensions/form-group.extension'
 import { CompromissosRoutingModule } from './compromissos-routing.module';

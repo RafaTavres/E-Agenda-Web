@@ -8,9 +8,10 @@ import { RouterLink } from '@angular/router';
 import { EditarContatosComponent } from './editar-contatos/editar-contatos.component';
 import { ExcluirContatosComponent } from './excluir-contatos/excluir-contatos.component';
 import { FormContatosComponent } from './shared/form-contatos/form-contatos.component';
-import { CardContatoComponent } from './card-contato/card-contato.component';
+import { CardContatoComponent } from './shared/card-contato/card-contato.component';
 import 'src/app/extensions/form-group.extension'
 import { ContatoRoutingModule } from './contatos-routing.module';
+import { VisualizarContatosComponent } from './visualizar-contatos/visualizar-contatos.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ContatoRoutingModule } from './contatos-routing.module';
     EditarContatosComponent,
     ExcluirContatosComponent,
     FormContatosComponent,
-    CardContatoComponent
+    CardContatoComponent,
+    VisualizarContatosComponent
   ],
   imports: [
     CommonModule,

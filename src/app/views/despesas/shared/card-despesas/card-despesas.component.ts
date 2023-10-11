@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ListarDespesasViewModel } from '../models/listar-despesas.view-model';
+import { ListarDespesasViewModel } from '../../models/listar-despesas.view-model';
 
 @Component({
   selector: 'app-card-despesas',

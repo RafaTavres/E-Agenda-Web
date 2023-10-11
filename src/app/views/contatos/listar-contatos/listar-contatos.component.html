@@ -10,19 +10,52 @@
   
         <!-- Barra de Ações -->
         <div class="d-grid d-md-flex gap-1 mt-5">
+
           <a
             [routerLink]="['/contatos/inserir']"
             role="button"
             class="btn btn-primary me-md-1"
           >
-            <i class="pi pi-plus-circle me-2"></i>
+            <i class="bi bi-plus-circle me-2"></i>
             Novo Contato
           </a>
+
+          <div class="d-flex gap-2">
+
+            <a
+            (click)="carregarTodos()"
+            role="button"
+            class="btn btn-primary me-md-1"
+            >
+                <i class="bi bi-bookmark-fill me-2"></i>
+              Todos
+            </a>
+
+            <a
+            (click)="carregarFavoritos()"
+            role="button"
+            class="btn btn-danger me-md-1"
+            >
+                <i class="bi bi-heart-fill me-2"></i>
+              Favoritos
+            </a>
+
+            <a
+            (click)="carregarNaoFavoritos()"
+            role="button"
+            class="btn btn-secondary me-md-1"
+            >
+                <i class="bi bi-heart me-2"></i>
+              Não Favoritos
+            </a>
+
+          </div>
+
         </div>
   
         <!-- Listagem de Registros -->
         <div class="row mt-3 g-2">
-            <app-card-contato  class="col-12 col-md-6 col-lg-4" *ngFor="let contato of contatos" [contato]="contato"></app-card-contato>
+            <app-card-contato (onFavoritar)="favoritarContato($event)"  class="col-12 col-md-6 col-lg-4" *ngFor="let contato of contatos" [contato]="contato"></app-card-contato>
         </div>
       </div>
     </div>
