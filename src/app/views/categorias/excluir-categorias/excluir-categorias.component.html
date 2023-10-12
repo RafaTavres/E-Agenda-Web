@@ -15,9 +15,12 @@
           </h2>
         </div>
 
-        <div class="card">
+        <h5>Despesas: </h5>
+        <div class="card">  
             <div *ngFor="let despesa of categoriaVM.despesas">
-                <span>{{despesa}}</span>
+              <hr/>
+                <a class="tetx-dark fw-bold" routerLink="/despesas/listar"> {{despesa.descricao}}, para dia {{despesa.data | date: 'dd/MM/yyyy'}}</a>
+              <hr/>
             </div>
         </div>
   
@@ -34,7 +37,7 @@
           </button>
 
           <button
-            routerLink="/contatos/listar"
+            routerLink="/categorias/listar"
             type="button"
             class="btn btn-outline-primary px-5"
           >

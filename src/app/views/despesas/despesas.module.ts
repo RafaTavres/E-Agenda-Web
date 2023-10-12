@@ -13,7 +13,7 @@ import { CategoriasModule } from '../categorias/categorias.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EditarDespesasComponent } from './editar-despesas/editar-despesas.component';
 import { ExcluirDespesasComponent } from './excluir-despesas/excluir-despesas.component';
-
+import 'src/app/extensions/form-group.extension'
 
 @NgModule({
   declarations: [

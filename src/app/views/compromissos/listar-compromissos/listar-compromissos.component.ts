@@ -14,27 +14,48 @@ import { CompromissoService } from '../services/compromissos.service';
 export class ListarCompromissosComponent  implements OnInit{
   compromissos:ListarCompromissoViewModel[] = [];
 
-  constructor(private route:ActivatedRoute,private toastrService:ToastrService){
+  constructor(private route:ActivatedRoute,private toastrService:ToastrService,private compromissoServie:CompromissoService){
   }
 
   ngOnInit(): void {
- 
-    this.route.data.pipe(map((dados) => dados['compromissos'])).subscribe({
-      next:(res: ListarCompromissoViewModel[]) => this.processarSucesso(res),
-      error: (error: Error) => this.processarErro(error)
-    })
-    
+    this.carregarTodos();
   }
 
-  processarErro(error: Error): void {
-    this.toastrService.error(
-     `Falha ao carregar compromissos: ${error.message}`,
-     'Erro'
-   ); 
+    processarErro(error: Error): void {
+      this.toastrService.error(
+      `Falha ao carregar compromissos: ${error.message}`,
+      'Erro'
+    ); 
 
-   }
+    }
 
- processarSucesso(res: ListarCompromissoViewModel[]){
-   this.compromissos = res
- }
+    processarSucesso(res: ListarCompromissoViewModel[]){
+      console.log(res)
+      this.compromissos = res
+    }
+
+    carregarPassados(){
+      this.compromissoServie.selecionarTodosPassados().subscribe({        
+        next:(res: ListarCompromissoViewModel[]) => this.processarSucesso(res),
+        error: (error: Error) => this.processarErro(error)
+      });
+    }
+
+    carregarFuturos(){
+    
+    }
+
+    carregarTodos(){
+      this.route.data.pipe(map((dados) => dados['compromissos'])).subscribe({
+        next:(res: ListarCompromissoViewModel[]) => this.processarSucesso(res),
+        error: (error: Error) => this.processarErro(error)
+      })
+    }
+
+    carregarHoje(){
+      this.compromissoServie.selecionarTodosHoje().subscribe({        
+        next:(res: ListarCompromissoViewModel[]) => this.processarSucesso(res),
+        error: (error: Error) => this.processarErro(error)
+      });
+    }
 }

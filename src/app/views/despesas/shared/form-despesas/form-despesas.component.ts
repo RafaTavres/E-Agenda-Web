@@ -41,7 +41,7 @@ export class FormsDespesasComponent implements OnInit {
         {
           descricao: this.despesaBuscada.descricao,
           valor: this.despesaBuscada.valor,
-          data: this.despesaBuscada.data,
+          data: this.despesaBuscada.data.slice(0,10),
           formaPagamento: this.despesaBuscada.formaPagamento,
           categoriasSelecionadas: this.despesaBuscada.categoriasSelecionadas,
         }

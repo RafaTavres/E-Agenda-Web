@@ -27,7 +27,8 @@ const visualizarDespesasResolver: ResolveFn<VisualizarDespesasViewModel> =
   }
 
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
   path:'',
   redirectTo: 'listar',
   pathMatch:'full',

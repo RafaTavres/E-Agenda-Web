@@ -18,6 +18,47 @@
             <i class="pi bi-plus-circle me-2"></i>
             Novo Compromisso
           </a>
+
+          <div class="d-flex gap-2">
+
+            <a
+            (click)="carregarTodos()"
+            role="button"
+            class="btn btn-primary me-md-1"
+            >
+                <i class="bi bi-bookmark-fill me-2"></i>
+              Todos
+            </a>
+
+            <a
+            (click)="carregarHoje()"
+            role="button"
+            class="btn btn-warning me-md-1"
+            >
+                <i class="bi bi-brightness-alt-high-fill me-2"></i>
+              Hoje
+            </a>
+
+            <a
+            (click)="carregarPassados()"
+            role="button"
+            class="botao-passados text-light btn btn-dark me-md-1"
+            >
+                <i class="bi bi-clock-fill me-2"></i>
+              Passados
+            </a>
+
+            <a
+            (click)="carregarFuturos()"
+            role="button"
+            class="btn btn-info me-md-1"
+            >
+                <i class="bi bi-arrow-right-circle-fill me-2"></i>
+              Futuros
+            </a>
+
+          </div>
+
         </div>
   
         <!-- Listagem de Registros -->

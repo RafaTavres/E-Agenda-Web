@@ -2,32 +2,32 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http
 import { Injectable } from "@angular/core";
 import { Observable, map, catchError, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
-import { FormsCompromissoViewModel } from "../../compromissos/models/form-compromisso.view-model";
+import { FormsTarefasViewModel } from "../models/tarefa/form-tarefas.view-model";
 
 @Injectable()
 
-export class CompromissoService{
-    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/compromissos/';
+export class TarefasService{
+    private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/tarefas/';
 
     constructor(private http: HttpClient){
 
     }
 
-    public inserir(compromisso: FormsCompromissoViewModel): Observable<FormsCompromissoViewModel>{
-        return this.http.post<any>(this.endpoit, compromisso,this.obterHeadersAutorizacao())
+    public inserir(tarefa: FormsTarefasViewModel): Observable<FormsTarefasViewModel>{
+        return this.http.post<any>(this.endpoit, tarefa,this.obterHeadersAutorizacao())
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
-    public editar(id:string, compromisso: FormsCompromissoViewModel): Observable<FormsCompromissoViewModel>{
-      return this.http.put<any>(this.endpoit + id, compromisso,this.obterHeadersAutorizacao())
+    public editar(id:string, tarefa: FormsTarefasViewModel): Observable<FormsTarefasViewModel>{
+      return this.http.put<any>(this.endpoit + id, tarefa,this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public excluir(id:string){
       return this.http.delete<any>(this.endpoit + id,this.obterHeadersAutorizacao())
-      .pipe(map(res => res),
+      .pipe(map((res) => res),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
@@ -35,18 +35,6 @@ export class CompromissoService{
         return this.http.get<any>(this.endpoit, this.obterHeadersAutorizacao())
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
-    }
-
-    public selecionarTodosHoje(){
-      return this.http.get<any>(this.endpoit + 'hoje', this.obterHeadersAutorizacao())
-      .pipe(map((res) => res.dados),
-      catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
-    }
-
-    public selecionarTodosPassados(){
-      return this.http.get<any>(this.endpoit + `passados/10/10/2010`, this.obterHeadersAutorizacao())
-      .pipe(map((res) => res.dados),
-      catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarPorId(id: string){
