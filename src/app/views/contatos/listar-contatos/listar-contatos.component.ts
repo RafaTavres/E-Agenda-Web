@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 import { FormsContatoViewModel } from '../models/form-contato.view-model';
@@ -14,7 +14,7 @@ import { ContatosService } from '../services/contato.service';
 export class ListarContatosComponent implements OnInit{
   contatos:ListarContatoViewModel[] = [];
 
-  constructor(private toastrService:ToastrService,private route:ActivatedRoute,private contatoService:ContatosService){
+  constructor(private toastrService:ToastrService,private router:Router,private route:ActivatedRoute,private contatoService:ContatosService){
   }
 
   ngOnInit(): void {
@@ -37,12 +37,11 @@ export class ListarContatosComponent implements OnInit{
    }
 
   processarSucesso(res: ListarContatoViewModel[]){
-    console.log(res);
     this.contatos = res
   }
 
   regarregar(){
-    window.location.reload();
+    this.carregarFavoritos()
   }
 
   carregarFavoritos(){

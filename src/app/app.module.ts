@@ -10,10 +10,12 @@ import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from './views/services/auth.service';
     
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashBoardModule,
     CoreModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
