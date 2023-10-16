@@ -6,7 +6,6 @@ import { StatusItemTarefa } from '../../models/itens/status-item-tarefa-enum';
 import { FormsTarefasViewModel } from '../../models/tarefa/form-tarefas.view-model';
 import { ListarTarefasViewModel } from '../../models/tarefa/listar-tarefas.view-model';
 import { TarefasService } from '../../services/tarefas.service';
-import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-form-tarefas',
