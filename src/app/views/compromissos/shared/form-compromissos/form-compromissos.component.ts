@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, FormControl, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
-import { DateValidator } from "src/app/validators/date-validator";
 import { ListarContatoViewModel } from "src/app/views/contatos/models/listar-contato.view-model";
 import { ContatosService } from "src/app/views/contatos/services/contato.service";
 import { FormsCompromissoViewModel } from "../../models/form-compromisso.view-model";
