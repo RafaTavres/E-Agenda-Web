@@ -11,6 +11,8 @@ import { FormTarefasComponent } from './shared/form-tarefas/form-tarefas.compone
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterLink } from "@angular/router";
 import 'src/app/extensions/form-group.extension'
+import { HttpClientModule } from "@angular/common/http";
+import { VisualizarItemTarefaComponent } from './visualizar-item-tarefa/visualizar-item-tarefa.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +21,15 @@ import 'src/app/extensions/form-group.extension'
     EditarTarefasComponent,
     ExcluirTarefasComponent,
     CardTarefasComponent,
-    FormTarefasComponent
+    FormTarefasComponent,
+    VisualizarItemTarefaComponent
   ],
   imports: [
     CommonModule,
     TarefasRoutingModule,
     ReactiveFormsModule,
     RouterLink,
+    HttpClientModule
   ],
   providers:[
     TarefasService

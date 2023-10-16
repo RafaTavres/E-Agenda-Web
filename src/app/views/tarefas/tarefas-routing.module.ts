@@ -8,6 +8,7 @@ import { FormsTarefasViewModel } from './models/tarefa/form-tarefas.view-model';
 import { ListarTarefasViewModel } from './models/tarefa/listar-tarefas.view-model';
 import { VisualizarTarefasViewModel } from './models/tarefa/visualizae-tarefas.view-model';
 import { TarefasService } from './services/tarefas.service';
+import { VisualizarItemTarefaComponent } from './visualizar-item-tarefa/visualizar-item-tarefa.component';
 
 const listarTarefaResolver : ResolveFn<ListarTarefasViewModel> =  
   () => 
@@ -56,6 +57,12 @@ const routes: Routes = [
     path:'excluir/:id',
     component:ExcluirTarefasComponent,
     resolve:{ tarefa: visualizarTarefaResolver},
+  }
+  ,
+  {
+    path:'visualizar-itens/:id',
+    component:VisualizarItemTarefaComponent,
+    resolve:{ tarefaCompleta: visualizarTarefaResolver, tarefa: formsTarefaResolver},
   }];
 
 @NgModule({

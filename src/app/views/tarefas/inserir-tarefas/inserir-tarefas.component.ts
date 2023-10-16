@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormsDespesasViewModel } from '../../despesas/models/form-despesas.view-model';
 import { FormsTarefasViewModel } from '../models/tarefa/form-tarefas.view-model';
+import { VisualizarTarefasViewModel } from '../models/tarefa/visualizae-tarefas.view-model';
 import { TarefasService } from '../services/tarefas.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class InserirTarefasComponent {
   
   gravar(tarefaVM: FormsTarefasViewModel){
     this.tarefaService.inserir(tarefaVM).subscribe({
-      next:(res: FormsTarefasViewModel) => this.processarSucesso(res),
+      next:(res) => this.processarSucesso(res),
       error: (error: Error) => this.processarErro(error)
     })
   }
@@ -30,6 +31,7 @@ export class InserirTarefasComponent {
   }
 
   processarSucesso(res: FormsTarefasViewModel){
+    console.log(res)
   this.toastrService.success(
     `Tarefa ${res.titulo} adicionada com sucesso`,
     'Sucess'

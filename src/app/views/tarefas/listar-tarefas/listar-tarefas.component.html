@@ -18,6 +18,36 @@
             <i class="pi bi-plus-circle me-2"></i>
             Nova Tarefa
           </a>
+          <div class="d-flex gap-2">
+
+            <a
+            (click)="carregarTodos()"
+            role="button"
+            class="btn btn-primary me-md-1"
+            >
+                <i class="bi bi-bookmark-fill me-2"></i>
+              Todos
+            </a>
+
+            <a
+            (click)="carregarConcluidas()"
+            role="button"
+            class="btn btn-success me-md-1"
+            >
+                <i class="bi bi-check-square me-2"></i>
+                Concluidas
+            </a>
+
+            <a
+            (click)="carregarPendentes()"
+            role="button"
+            class="text-light btn btn-danger me-md-1"
+            >
+                <i class="bi bi-x-square me-2"></i>
+              Pendentes
+            </a>
+
+          </div>
         </div>
   
         <!-- Listagem de Registros -->

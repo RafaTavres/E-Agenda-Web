@@ -12,7 +12,7 @@
     </div>
 
     <div class="form-group mb-3 position-relative">
-      <label class="form-label">Tipo de Compromisso:</label>
+      <label class="form-label">Prioridade:</label>
 
       <div class="d-flex align-items-center gap-2">
         <input formControlName="prioridade" name="prioridade" type="radio" [value]="0" />
@@ -23,11 +23,71 @@
         Alta
       </div>
     </div>
-    
-    
+        
+      <button
+              (click)="ativarFormItens()"
+              class="btn btn-success"
+              type="button"
+              >
+              <i [ngClass]="!adicionarItens ? 'bi-plus-circle' : 'bi-dash-circle'" class="bi me-2"></i>
+                  Itens
+      </button>
+        <hr/>
+
+        <form *ngIf="adicionarItens == true" #myForm="ngForm" [formGroup]="formItem" class="d-flex gap-3 mt-4 g-2"> 
+            <label class="form-label">Item:</label>
+                <input class="form-control" formControlName="titulo" type="text">
+                <button
+                  (click)="adicionarItem()"
+                  class="btn btn-info"
+                  type="button"
+                >
+                <i class="bi bi-plus-circle text-light">Adicionar Item</i>
+              </button>
+          </form>
+
+          <hr/>
+
+          <table  class="table table-striped border rounded-3">
+            <thead>
+              <tr>
+                <th  scope="col">Titulo</th> 
+                <th  scope="col">Status</th>
+                <th  scope="col">Acoes</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of itens">
+                <td>{{item.titulo}}</td>
+                <td>{{item.concluido? 'Concluido' : 'Pendente'}} </td>
+                <td>
+                  <button 
+                    *ngIf="tarefaBuscada == undefined"
+                    type="button"
+                    (click)="removerItem(item)"
+                    class="btn btn-outline-danger"
+                  >
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                <button 
+                  *ngIf="tarefaBuscada != undefined"
+                  type="button"
+                  (click)="salvarAlteracoesItens()"
+                  routerLink="/tarefas/visualizar-itens/{{idSelecionado}}"
+                  class="btn btn-outline-success"
+                >
+                  <i class="bi bi-pen-fill"></i>
+                </button>
+              </td>
+
+              </tr>
+            </tbody>
+            
+          </table>
+        
 
   
-
 
     <div class="card-footer g-grid d-flex gap-1 mt-5">
       <button

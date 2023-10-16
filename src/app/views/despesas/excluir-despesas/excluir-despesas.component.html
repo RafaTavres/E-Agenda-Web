@@ -39,10 +39,8 @@
           <dt class="col-md-4">
             <label class="control-label">Categorias:</label>
           </dt>
-          <div class="border border-dark rounded-2">
-            <hr/>
-              <dd *ngFor="let categoria of despesaVM.categorias" class="col-md-8 fw-semibold">{{categoria}}</dd>
-            <hr/>
+          <div class="rounded-2 d-flex gap-3 d-flex">
+              <dd *ngFor="let categoria of despesaVM.categorias" class="align-items-center col-3 bg-primary border text-light rounded-3">{{categoria}}</dd>   
           </div>
 
         </dl>

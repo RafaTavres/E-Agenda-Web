@@ -42,7 +42,10 @@ export class ListarCompromissosComponent  implements OnInit{
     }
 
     carregarFuturos(){
-    
+      this.compromissoServie.selecionarTodosFuturos().subscribe({        
+        next:(res: ListarCompromissoViewModel[]) => this.processarSucesso(res),
+        error: (error: Error) => this.processarErro(error)
+      });
     }
 
     carregarTodos(){

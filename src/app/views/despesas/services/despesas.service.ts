@@ -37,6 +37,18 @@ export class DespesasService{
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
+    public selecionarTodosAntigas(){
+      return this.http.get<any>(this.endpoit + 'antigas', this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
+      catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
+    } 
+
+    public selecionarTodosUltimos30Dias(){
+      return this.http.get<any>(this.endpoit + 'ultimos-30-dias', this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
+      catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
+    } 
+
     public selecionarPorId(id: string){
       return this.http.get<any>(this.endpoit + id, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),

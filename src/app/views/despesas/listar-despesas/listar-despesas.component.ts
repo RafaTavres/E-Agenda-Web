@@ -13,15 +13,11 @@ import { DespesasService } from '../services/despesas.service';
 export class ListarDespesasComponent {
   despesas: ListarDespesasViewModel[] = [];
 
-  constructor(private route:ActivatedRoute,private toastrService:ToastrService){
+  constructor(private route:ActivatedRoute,private toastrService:ToastrService,private despesaService:DespesasService){
   }
 
   ngOnInit(): void {
-   
-    this.route.data.pipe(map((dados) => dados['despesas'])).subscribe({
-      next:(res: ListarDespesasViewModel[]) => this.processarSucesso(res),
-      error: (error: Error) => this.processarErro(error)
-    })
+   this.carregarTodos();
   }
 
   processarErro(error: Error): void {
@@ -36,4 +32,25 @@ export class ListarDespesasComponent {
    console.log(res);
    this.despesas = res
  }
+
+  carregarAntigas(){
+    this.despesaService.selecionarTodosAntigas().subscribe({
+      next:(res: ListarDespesasViewModel[]) => this.processarSucesso(res),
+      error: (error: Error) => this.processarErro(error)
+    })
+  }
+
+  carregarTodos(){
+    this.route.data.pipe(map((dados) => dados['despesas'])).subscribe({
+      next:(res: ListarDespesasViewModel[]) => this.processarSucesso(res),
+      error: (error: Error) => this.processarErro(error)
+    })
+  }
+
+  carregarUltimos30Dias(){
+    this.despesaService.selecionarTodosUltimos30Dias().subscribe({
+      next:(res: ListarDespesasViewModel[]) => this.processarSucesso(res),
+      error: (error: Error) => this.processarErro(error)
+    })
+  }
 }

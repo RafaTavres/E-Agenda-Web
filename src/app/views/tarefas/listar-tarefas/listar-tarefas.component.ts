@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 import { ListarTarefasViewModel } from '../models/tarefa/listar-tarefas.view-model';
+import { TarefasService } from '../services/tarefas.service';
 
 @Component({
   selector: 'app-listar-tarefas',
@@ -13,15 +14,12 @@ export class ListarTarefasComponent {
 
   tarefas: ListarTarefasViewModel[] = [];
 
-  constructor(private route:ActivatedRoute,private toastrService:ToastrService){
+  constructor(private route:ActivatedRoute,private toastrService:ToastrService, private tarefaService: TarefasService){
   }
 
   ngOnInit(): void {
    
-    this.route.data.pipe(map((dados) => dados['tarefas'])).subscribe({
-      next:(res: ListarTarefasViewModel[]) => this.processarSucesso(res),
-      error: (error: Error) => this.processarErro(error)
-    })
+    this.carregarTodos()
   }
 
   processarErro(error: Error): void {
@@ -36,4 +34,26 @@ export class ListarTarefasComponent {
    console.log(res);
    this.tarefas = res
  }
+
+  carregarConcluidas(){
+    this.tarefaService.selecionarTodosConcluidos().subscribe({
+      next:(res: ListarTarefasViewModel[]) => this.processarSucesso(res),
+      error: (error: Error) => this.processarErro(error)
+    })
+  }
+
+  carregarTodos(){
+    this.route.data.pipe(map((dados) => dados['tarefas'])).subscribe({
+      next:(res: ListarTarefasViewModel[]) => this.processarSucesso(res),
+      error: (error: Error) => this.processarErro(error)
+    })
+  }
+
+  carregarPendentes(){
+    this.tarefaService.selecionarTodosPendentes().subscribe({
+      next:(res: ListarTarefasViewModel[]) => this.processarSucesso(res),
+      error: (error: Error) => this.processarErro(error)
+    })
+  }
+
 }

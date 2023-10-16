@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+      <!-- Conteúdo principal -->
+      <div class="col-12 col-md-10 col-lg-9 mx-auto my-5">
+        <!-- Titulo -->
+        <div class="text-md-start">
+          <div class="text-md-start">
+            <h1 class="fw-bold text-primary">Visualizando Itens da Tarefa {{tarefaBuscada.titulo.slice(0,10)}}...</h1>
+            <hr />
+          </div>
+  
+          <h4>Percentual Concluido: {{tarefaBuscada.percentualConcluido}}%</h4>
+          <table  class="table table-striped border rounded-3">
+            <thead>
+              <tr>
+                <th  scope="col">Titulo</th> 
+                <th  scope="col">Status</th>
+                <th  scope="col">Ações</th>
+              </tr>
+            </thead>
+        
+            <tbody>
+              <tr *ngFor="let item of tarefaVM.itens">
+                <td [ngClass]="item.status == 2 ? 'bg-secondary' : ''">{{item.titulo}}</td>
+                <td *ngIf="item.status != 2" ><input [value]="item.concluido" (change)="modificarItem(item)" type="checkbox" [checked]="item.concluido">{{item.concluido? 'Concluido' : 'Pendente'}} </td>
+                <td *ngIf="item.status == 2" class="bg-secondary"><input disabled [value]="item.concluido" type="checkbox" [checked]="item.concluido">{{item.concluido? 'Concluido' : 'Pendente'}} </td>
+                <td [ngClass]="item.status == 2 ? 'bg-secondary' : ''">
+                    <button 
+                      *ngIf="item.status != 2"
+                      type="button"
+                      (click)="removerItem(item)"
+                      class="btn btn-outline-danger"
+                    >
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                    <button 
+                    *ngIf="item.status == 2"
+                    type="button"
+                    (click)="voltarItem(item)"
+                    class="btn btn-outline-info"
+                    >
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    </button>
+                </td>
+                </tr>
+            </tbody>
+            
+          </table>
+        
+          <div class="card-footer g-grid d-flex gap-1 mt-5">
+            <button
+              (click)="editarItens()"
+              type="button"
+              class="btn btn-success px-5"
+            >
+              <i class="bi bi-pen-fill me-2"></i>
+              Modificar Itens
+            </button>
+            <button
+              routerLink="/tarefas/listar"
+              type="button"
+              class="btn btn-outline-primary px-5"
+            >
+              <i class="bi bi-arrow-return-left me-2"></i>
+              Voltar
+            </button>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+

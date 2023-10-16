@@ -8,10 +8,19 @@
       </div>
         <span  class="card-text">Criada: {{ tarefa.dataCriacao | date:'dd/MM/yyyy' }}</span>
         <span  class="card-text ">Prioridade: {{ tarefa.prioridade }}</span>
-        <span  class="card-text ">Situcao: {{ tarefa.situacao }}</span>
+        <span  class="card-text ">Situacao: {{ tarefa.situacao }}</span>
     </div>
   
     <div class="d-flex gap-1 justify-content-end card-footer bg-transparent">
+      <button 
+      class="btn btn-outline-success rounded-5 py-2"
+      routerLink="/tarefas/visualizar-itens/{{ tarefa.id }}"
+      aria-label="Visualizar Itens"
+      ngbTooltip="Visualizar Itens"
+      placement="bottom"
+    >
+      <i class="bi bi-list-task"></i>
+    </button>
      <button 
         class="btn btn-outline-primary rounded-5 py-2"
         routerLink="/tarefas/editar/{{ tarefa.id }}"

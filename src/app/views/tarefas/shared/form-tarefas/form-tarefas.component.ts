@@ -6,7 +6,7 @@ import { StatusItemTarefa } from '../../models/itens/status-item-tarefa-enum';
 import { FormsTarefasViewModel } from '../../models/tarefa/form-tarefas.view-model';
 import { ListarTarefasViewModel } from '../../models/tarefa/listar-tarefas.view-model';
 import { TarefasService } from '../../services/tarefas.service';
-import { Guid } from 'guid-typescript';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-form-tarefas',
@@ -16,34 +16,44 @@ import { Guid } from 'guid-typescript';
 export class FormTarefasComponent implements OnInit {
 
   form!: FormGroup;
+  formItem!:FormGroup;
   tarefaVM!: FormsTarefasViewModel;
-  categorias:ListarTarefasViewModel[] = [];
+  itens:FormsItemTarefaViewModel[] = []
+  adicionarItens:boolean = false
 
+  @Input() idSelecionado: any;
   @Input() tarefaBuscada: any;
   @Output() onGravar: EventEmitter<FormsTarefasViewModel | null>
+  @Output() onSalvarAlteraceosItens: EventEmitter<FormsTarefasViewModel | null>
 
   constructor(private formBuilder: FormBuilder,private tarefaService:TarefasService,private toastrService:ToastrService){
     this.onGravar = new EventEmitter();
+    this.onSalvarAlteraceosItens = new EventEmitter();
   }  
   
   ngOnInit(): void {
 
     this.form = this.formBuilder.group({
-     id: new FormControl(Guid.create(),[Validators.required]),
      titulo: new FormControl('',[Validators.required]),
      prioridade: new FormControl(0,[Validators.required]),
-     itens: new FormControl([new FormsItemTarefaViewModel(Guid.create(),'1',StatusItemTarefa.Adicionado,true)],[Validators.required]),
     });
     
+    this.formItem = this.formBuilder.group({
+      titulo: new FormControl('',[Validators.required]),
+      concluido: new FormControl(false),
+      status: new FormControl(StatusItemTarefa.Adicionado)
+     });
 
     this.form.patchValue(
         {
           titulo: this.tarefaBuscada.titulo,
           prioridade: this.tarefaBuscada.prioridade,
-          itens: this.tarefaBuscada.itens,
         }
       );
-  
+
+    console.clear()
+    console.log(this.tarefaBuscada)
+    this.itens = this.tarefaBuscada.itens;  
   }
   campoInvalido(nome: string){
     return this.form.get(nome)?.invalid && this.form.get(nome)?.touched;
@@ -62,12 +72,59 @@ export class FormTarefasComponent implements OnInit {
         return;
      }
 
-
+    
     this.tarefaVM = this.form.value;
-    console.log(this.tarefaVM)
+    this.tarefaVM.itens = this.itens
     this.onGravar.emit(this.tarefaVM);
   }
 
+
+  salvarAlteracoesItens(){
+    if(this.form.invalid){
+
+        const erros = this.form.validate();
+        for(let erro of erros){
+         this.toastrService.warning(
+           erro
+         );
+        }
+        
+        return;
+     }
+
+    this.tarefaVM.itens = this.itens
+    this.onSalvarAlteraceosItens.emit(this.tarefaVM);
+  }
+
+
+
+  public adicionarItem(){
+   let item = this.formItem.value;
+
+   let existe = false;
+      this.itens.forEach(i => {
+        if (i.titulo == item.titulo){ existe = true}})
+     
+   if(existe == false)
+      this.itens.push(this.formItem.value);
+    else
+      this.toastrService.warning(
+        'Item ja existe!',
+        'Erro'
+      );
+  }
+
+  public removerItem(item:any){
+    let index = this.itens.indexOf(item);
+    this.itens.splice(index,1)
+    console.clear()
+    console.log(this.itens)
+  }
+
+
+  public ativarFormItens(){
+    this.adicionarItens = !this.adicionarItens
+  }
 
 }
 

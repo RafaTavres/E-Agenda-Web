@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, map, catchError, throwError } from "rxjs";
@@ -44,7 +45,15 @@ export class CompromissoService{
     }
 
     public selecionarTodosPassados(){
-      return this.http.get<any>(this.endpoit + `passados/10/10/2010`, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + `passados/${this.dataAtual()}`, this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
+      catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
+    }
+
+    public selecionarTodosFuturos(){
+
+      console.log(this.endpoit + `futuros/${this.dataAtual()}=${this.dataFutura()}`)
+      return this.http.get<any>(this.endpoit + `futuros/${this.dataAtual()}=${this.dataFutura()}`, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
@@ -78,7 +87,27 @@ export class CompromissoService{
       return throwError(() => new Error(mensagemErro));
     }
 
+    dataAtual(date = new Date()) {
+      const year = date.toLocaleString('default', {year: 'numeric'});
+      const month = date.toLocaleString('default', {
+        month: '2-digit',
+      });
+      const day = date.toLocaleString('default', {day: '2-digit'});
     
+      return [year, month, day].join('-');
+    }
+
+    dataFutura(date = new Date()) {
+      date.setFullYear(date.getFullYear() + 100);
+      const year = date.toLocaleString('default', {year: 'numeric'});
+      const month = date.toLocaleString('default', {
+        month: '2-digit',
+      });
+      const day = date.toLocaleString('default', {day: '2-digit'});
+    
+      return [year, month, day].join('-');
+    }
+
     private obterHeadersAutorizacao() {
         const token = environment.apiKey;
     
