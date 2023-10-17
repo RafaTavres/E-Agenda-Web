@@ -10,7 +10,9 @@ import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthService } from './views/services/auth.service';
+import { RegistroModule } from './views/registro/registro.module';
+import { LoginModule } from './views/login/login.module';
+
     
 @NgModule({
   declarations: [
@@ -35,8 +37,10 @@ import { AuthService } from './views/services/auth.service';
     HttpClientModule,
     DashBoardModule,
     CoreModule,
+    RegistroModule,
+    LoginModule
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

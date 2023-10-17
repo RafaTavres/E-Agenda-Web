@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, map, catchError, throwError } from "rxjs";
+import { LocalStorageService } from "src/app/core/auth/services/local-storage.service";
 import { environment } from "src/environments/environment";
 import { FormsDespesasViewModel } from "../models/form-despesas.view-model";
 
@@ -9,7 +10,7 @@ import { FormsDespesasViewModel } from "../models/form-despesas.view-model";
 export class DespesasService{
     private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/despesas/';
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient,private localStorage: LocalStorageService){
 
     }
 
@@ -80,7 +81,7 @@ export class DespesasService{
 
     
     private obterHeadersAutorizacao() {
-        const token = environment.apiKey;
+      const token = this.localStorage.obterDadosLocaisUsuario()?.chave;
     
         return {
           headers: new HttpHeaders({

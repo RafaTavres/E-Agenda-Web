@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, map, catchError, throwError } from "rxjs";
+import { LocalStorageService } from "src/app/core/auth/services/local-storage.service";
 import { environment } from "src/environments/environment";
 import { FormsTarefasViewModel } from "../models/tarefa/form-tarefas.view-model";
 import { VisualizarTarefasViewModel } from "../models/tarefa/visualizae-tarefas.view-model";
@@ -10,7 +11,7 @@ import { VisualizarTarefasViewModel } from "../models/tarefa/visualizae-tarefas.
 export class TarefasService{
     private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/tarefas';
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient,private localStorage: LocalStorageService){
 
     }
 
@@ -81,7 +82,7 @@ export class TarefasService{
 
     
     private obterHeadersAutorizacao() {
-        const token = environment.apiKey;
+      const token = this.localStorage.obterDadosLocaisUsuario()?.chave;
     
         return {
           headers: new HttpHeaders({
