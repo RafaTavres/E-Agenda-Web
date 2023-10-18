@@ -48,7 +48,7 @@ export class LoginComponent {
       'Sucesso'
     );
 
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dash-board']);
   }
 
   processarFalha(err: Error) {
