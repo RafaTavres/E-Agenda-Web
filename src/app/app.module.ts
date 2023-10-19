@@ -1,8 +1,9 @@
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
-import { NgModule, APP_INITIALIZER } from "@angular/core";
+import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA  } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrModule } from "ngx-toastr";
+
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -15,12 +16,14 @@ import { RegistroModule } from "./views/registro/registro.module";
 import { httpTokenInterceptor } from "./core/auth/interceptors/http-token-interceptor";
 import { AuthService } from "./core/auth/services/auth.service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-    
+   
+import { NgxSpinnerModule } from "ngx-spinner";
+
+import {LoadingBarRouterModule} from '@ngx-loading-bar/router'
+
 function logarUsuarioSalvoFactory(authService : AuthService){
   return () => authService.logarUsuarioSalvo();
 }
-
-
 
 @NgModule({
   declarations: [
@@ -41,12 +44,16 @@ function logarUsuarioSalvoFactory(authService : AuthService){
       }
     ),
 
-    
-    
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+
+    LoadingBarRouterModule,
+
     DashBoardModule,
     CoreModule,
     RegistroModule,
-    LoginModule
+    LoginModule,
+
+    
   ],
   providers: [
     {
@@ -57,6 +64,8 @@ function logarUsuarioSalvoFactory(authService : AuthService){
     },
     provideHttpClient(withInterceptors([httpTokenInterceptor]))
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

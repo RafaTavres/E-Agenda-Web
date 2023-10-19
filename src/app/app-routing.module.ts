@@ -34,7 +34,8 @@ const routes: Routes = [
   {
     path:'categorias',
     loadChildren: () => import('./views/categorias/categorias.module').then((m) =>m.CategoriasModule),
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+
   }
   ,
   {
