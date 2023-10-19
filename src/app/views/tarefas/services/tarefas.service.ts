@@ -16,49 +16,49 @@ export class TarefasService{
     }
 
     public inserir(tarefa: FormsTarefasViewModel): Observable<FormsTarefasViewModel>{
-        return this.http.post<any>(this.endpoit, tarefa,this.obterHeadersAutorizacao())
+        return this.http.post<any>(this.endpoit, tarefa )
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public editar(id:string, tarefa: FormsTarefasViewModel): Observable<FormsTarefasViewModel>{
-      return this.http.put<any>(this.endpoit + '/' +id, tarefa,this.obterHeadersAutorizacao())
+      return this.http.put<any>(this.endpoit + '/' +id, tarefa )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public excluir(id:string){
-      return this.http.delete<any>(this.endpoit + '/' + id,this.obterHeadersAutorizacao())
+      return this.http.delete<any>(this.endpoit + '/' + id )
       .pipe(map((res) => res),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodosConcluidos(){
-        return this.http.get<any>(this.endpoit + '?status=2', this.obterHeadersAutorizacao())
+        return this.http.get<any>(this.endpoit + '?status=2' )
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodosPendentes(){
-      return this.http.get<any>(this.endpoit + '?status=1', this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + '?status=1' )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodos(){
-      return this.http.get<any>(this.endpoit, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarPorId(id: string){
-      return this.http.get<any>(this.endpoit + '/'+  id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + '/'+  id )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarCompletoPorId(id: string){
-      return this.http.get<any>(this.endpoit +'/visualizacao-completa/' + id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit +'/visualizacao-completa/' + id )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
@@ -81,14 +81,5 @@ export class TarefasService{
     }
 
     
-    private obterHeadersAutorizacao() {
-      const token = this.localStorage.obterDadosLocaisUsuario()?.chave;
-    
-        return {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          }),
-        };
-      }
+
 }

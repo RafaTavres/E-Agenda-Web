@@ -1,23 +1,26 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { NgModule, APP_INITIALIZER } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ToastrModule } from "ngx-toastr";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {ToastrModule } from 'ngx-toastr';
-import { DashBoardModule } from './views/dash-board/dash-board.module';
-import { CoreModule } from './core/core.module';
-import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
+import { CoreModule } from "./core/core.module";
+import { DashBoardModule } from "./views/dash-board/dash-board.module";
+import { LoginModule } from "./views/login/login.module";
+import { RegistroModule } from "./views/registro/registro.module";
+
+import { httpTokenInterceptor } from "./core/auth/interceptors/http-token-interceptor";
+import { AuthService } from "./core/auth/services/auth.service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RegistroModule } from './views/registro/registro.module';
-import { LoginModule } from './views/login/login.module';
-import { AuthService } from './core/auth/services/auth.service';
-
     
 function logarUsuarioSalvoFactory(authService : AuthService){
   return () => authService.logarUsuarioSalvo();
 }
+
+
 
 @NgModule({
   declarations: [
@@ -39,19 +42,21 @@ function logarUsuarioSalvoFactory(authService : AuthService){
     ),
 
     
-    HttpClientModule,
+    
     DashBoardModule,
     CoreModule,
     RegistroModule,
     LoginModule
   ],
-  providers: [{
+  providers: [
+    {
     provide: APP_INITIALIZER,
     useFactory: logarUsuarioSalvoFactory,
     deps:[AuthService],
     multi:true,
-
-  }],
+    },
+    provideHttpClient(withInterceptors([httpTokenInterceptor]))
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

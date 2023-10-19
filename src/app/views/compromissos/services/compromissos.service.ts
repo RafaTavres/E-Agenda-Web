@@ -16,37 +16,37 @@ export class CompromissoService{
     }
 
     public inserir(compromisso: FormsCompromissoViewModel): Observable<FormsCompromissoViewModel>{
-        return this.http.post<any>(this.endpoit, compromisso,this.obterHeadersAutorizacao())
+        return this.http.post<any>(this.endpoit, compromisso )
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public editar(id:string, compromisso: FormsCompromissoViewModel): Observable<FormsCompromissoViewModel>{
-      return this.http.put<any>(this.endpoit + id, compromisso,this.obterHeadersAutorizacao())
+      return this.http.put<any>(this.endpoit + id, compromisso )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public excluir(id:string){
-      return this.http.delete<any>(this.endpoit + id,this.obterHeadersAutorizacao())
+      return this.http.delete<any>(this.endpoit + id )
       .pipe(map(res => res),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodos(){
-        return this.http.get<any>(this.endpoit, this.obterHeadersAutorizacao())
+        return this.http.get<any>(this.endpoit )
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodosHoje(){
-      return this.http.get<any>(this.endpoit + 'hoje', this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + 'hoje' )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodosPassados(){
-      return this.http.get<any>(this.endpoit + `passados/${this.dataAtual()}`, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + `passados/${this.dataAtual()}` )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
@@ -54,19 +54,19 @@ export class CompromissoService{
     public selecionarTodosFuturos(){
 
       console.log(this.endpoit + `futuros/${this.dataAtual()}=${this.dataFutura()}`)
-      return this.http.get<any>(this.endpoit + `futuros/${this.dataAtual()}=${this.dataFutura()}`, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + `futuros/${this.dataAtual()}=${this.dataFutura()}` )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarPorId(id: string){
-      return this.http.get<any>(this.endpoit + id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + id )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarCompletoPorId(id: string){
-      return this.http.get<any>(this.endpoit +'visualizacao-completa/' + id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit +'visualizacao-completa/' + id )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
@@ -109,14 +109,5 @@ export class CompromissoService{
       return [year, month, day].join('-');
     }
 
-    private obterHeadersAutorizacao() {
-      const token = this.localStorage.obterDadosLocaisUsuario()?.chave;
-    
-        return {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          }),
-        };
-      }
+   
 }

@@ -1,9 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, map, catchError, throwError } from "rxjs";
-import { LocalStorageService } from "src/app/core/auth/services/local-storage.service";
-import { environment } from "src/environments/environment";
-import { FormsCompromissoViewModel } from "../../compromissos/models/form-compromisso.view-model";
 import { FormsCategoriaViewModel } from "../models/form-categoria.view-model";
 
 @Injectable()
@@ -11,42 +8,42 @@ import { FormsCategoriaViewModel } from "../models/form-categoria.view-model";
 export class CategoriaService{
     private endpoit: string = 'https://e-agenda-web-api.onrender.com/api/categorias/';
 
-    constructor(private http: HttpClient,private localStorage: LocalStorageService){
+    constructor(private http: HttpClient){
 
     }
 
     public inserir(categoria: FormsCategoriaViewModel): Observable<FormsCategoriaViewModel>{
-        return this.http.post<any>(this.endpoit, categoria,this.obterHeadersAutorizacao())
+        return this.http.post<any>(this.endpoit, categoria )
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public editar(id:string, categoria: FormsCategoriaViewModel): Observable<FormsCategoriaViewModel>{
-      return this.http.put<any>(this.endpoit + id, categoria,this.obterHeadersAutorizacao())
+      return this.http.put<any>(this.endpoit + id, categoria )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public excluir(id:string){
-      return this.http.delete<any>(this.endpoit + id,this.obterHeadersAutorizacao())
+      return this.http.delete<any>(this.endpoit + id )
       .pipe(map((res) => res),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodos(){
-        return this.http.get<any>(this.endpoit, this.obterHeadersAutorizacao())
+        return this.http.get<any>(this.endpoit  )
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarPorId(id: string){
-      return this.http.get<any>(this.endpoit + id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + id  )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarCompletoPorId(id: string){
-      return this.http.get<any>(this.endpoit +'visualizacao-completa/' + id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit +'visualizacao-completa/' + id)
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
@@ -69,14 +66,5 @@ export class CategoriaService{
     }
 
     
-    private obterHeadersAutorizacao() {
-      const token = this.localStorage.obterDadosLocaisUsuario()?.chave;
     
-        return {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          }),
-        };
-      }
 }

@@ -15,7 +15,7 @@ export class ContatosService{
     }
 
     public inserir(contato: FormsContatoViewModel): Observable<FormsContatoViewModel>{
-        return this.http.post<any>(this.endpoit, contato,this.obterHeadersAutorizacao())
+        return this.http.post<any>(this.endpoit, contato)
         .pipe(
           map(res => res.dados),
           catchError((err: HttpErrorResponse) =>this.processarHttpErros(err))
@@ -25,50 +25,50 @@ export class ContatosService{
   
 
     public editar(id:string, contato: FormsContatoViewModel): Observable<FormsContatoViewModel>{
-      return this.http.put<any>(this.endpoit + '/'+ id, contato,this.obterHeadersAutorizacao())
+      return this.http.put<any>(this.endpoit + '/'+ id, contato)
       .pipe(map(res => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public favoritar(id:string): Observable<FormsContatoViewModel>{
-      return this.http.put<any>(this.endpoit + '/favoritos/'+ id,{},this.obterHeadersAutorizacao())
+      return this.http.put<any>(this.endpoit + '/favoritos/'+ id,{})
       .pipe(map(res => res),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public excluir(id:string){
-      return this.http.delete<any>(this.endpoit + '/'+id,this.obterHeadersAutorizacao())
+      return this.http.delete<any>(this.endpoit + '/'+id)
       .pipe(map(res => res),
        catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
      
     }
 
     public selecionarTodos(){
-        return this.http.get<any>(this.endpoit, this.obterHeadersAutorizacao())
+        return this.http.get<any>(this.endpoit)
         .pipe(map((res) => res.dados),
         catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodosFavoritos(){
-      return this.http.get<any>(this.endpoit +'?statusFavorito=1', this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit +'?statusFavorito=1')
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarTodosNaoFavoritos(){
-      return this.http.get<any>(this.endpoit +'?statusFavorito=2', this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit +'?statusFavorito=2')
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarPorId(id: string){
-      return this.http.get<any>(this.endpoit + '/'+ id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit + '/'+ id)
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
 
     public selecionarCompletoPorId(id: string){
-      return this.http.get<any>(this.endpoit +'/visualizacao-completa/' + id, this.obterHeadersAutorizacao())
+      return this.http.get<any>(this.endpoit +'/visualizacao-completa/' + id)
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) =>this.processarHttpErros(err)))
     }
@@ -90,14 +90,5 @@ export class ContatosService{
       return throwError(() => new Error(mensagemErro));
     }
 
-    private obterHeadersAutorizacao() {
-        const token = this.localStorage.obterDadosLocaisUsuario()?.chave;
-    
-        return {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          }),
-        };
-      }
+  
 }
