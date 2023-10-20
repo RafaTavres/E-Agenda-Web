@@ -10,7 +10,7 @@
         <div class="row border border-secondary justify-content-center fw-semibold">
             Previsto Para
             <span  class="card-text">Data: {{ despesa.data | date:'dd/MM/yyyy' }} ({{ despesa.data | date:'dd MMM YY' }})</span>
-            <span  class="card-text ">Valor: {{ despesa.valor }}</span>
+            <span  class="card-text ">Valor: {{ despesa.valor | currency }}</span>
             <span  class="card-text ">Forma de Pagamento: {{ despesa.formaPagamento }}</span>
         </div>
     </div>

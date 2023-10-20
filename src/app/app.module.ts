@@ -1,5 +1,5 @@
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
-import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA  } from "@angular/core";
+import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID,DEFAULT_CURRENCY_CODE  } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrModule } from "ngx-toastr";
@@ -21,9 +21,14 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
 import {LoadingBarRouterModule} from '@ngx-loading-bar/router'
 
+import { registerLocaleData  } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
 function logarUsuarioSalvoFactory(authService : AuthService){
   return () => authService.logarUsuarioSalvo();
 }
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -62,7 +67,13 @@ function logarUsuarioSalvoFactory(authService : AuthService){
     deps:[AuthService],
     multi:true,
     },
-    provideHttpClient(withInterceptors([httpTokenInterceptor]))
+    provideHttpClient(withInterceptors([httpTokenInterceptor])),
+    {
+      provide: LOCALE_ID,useValue: 'pt-BR',
+    },
+    {
+      provide: DEFAULT_CURRENCY_CODE, useValue: 'R$'
+    },
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

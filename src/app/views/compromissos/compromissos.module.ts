@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID  } from '@angular/core';
+import { NgModule  } from '@angular/core';
 import { CommonModule,registerLocaleData  } from '@angular/common';
 import { InserirCompromissosComponent } from './inserir-compromissos/inserir-compromissos.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -36,7 +36,6 @@ registerLocaleData(localePt);
   ],
   providers:[
     CompromissoService,
-    {provide: LOCALE_ID,useValue: 'pt-BR'},
   ]
 })
 export class CompromissosModule { }

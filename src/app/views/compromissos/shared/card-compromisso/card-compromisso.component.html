@@ -9,7 +9,7 @@
      
         <div class="row border border-secondary justify-content-center fw-semibold">
             Previsto Para
-            <span  class="card-text">Data: {{ compromisso.data | date:'dd/MM/yyyy' }} ({{ compromisso.data | date:'dd MMM YY'}})</span>
+            <span  class="card-text">Data: {{ compromisso.data | date }} ({{ compromisso.data | date}})</span>
             <span  class="card-text ">Hora de Inicio: {{ compromisso.horaInicio }}</span>
             <span  class="card-text ">Hora de Termino: {{ compromisso.horaTermino }}</span>
         </div>
